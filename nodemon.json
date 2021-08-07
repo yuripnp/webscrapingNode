@@ -1,0 +1,6 @@
+{
+    "ignore": [
+        "sites/*",
+        "roma.json"
+    ]
+}
