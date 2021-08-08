@@ -7,10 +7,10 @@ const { resolve } = require('path');
 
 
 const base_url = [
-    'https://www.romanews.com.br/',
-    'https://g1.globo.com/pa/para/',
-    'https://ge.globo.com/pa/',
-    'https://dol.com.br/?d=1'
+    {key: 'roma_news', value: 'https://www.romanews.com.br/'},
+    {key: 'g1_pa', value: 'https://g1.globo.com/pa/para/'},
+    {key: 'g1_esport', value: 'https://ge.globo.com/pa/'},
+    {key: 'diario_online', value: 'https://dol.com.br/?d=1'},
 ]
 
 
@@ -23,7 +23,7 @@ const main = () => {
 
     for (let i = 0; i < base_url.length; i++) {
 
-        if(base_url[i] === base_url[0]) { // Roma News
+        if(base_url[i].key === "roma_news") { // Roma News
 
             const browserHeaders = {
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
@@ -120,7 +120,7 @@ const main = () => {
             getCachePage(arquivo).then(getPageItems).then((data) => saveData(data, './roma.json')).then(console.log).catch(console.error);
         } // fim do if do romanews
 
-        if(base_url[i] === base_url[1]) { // globo PA
+        if(base_url[i].key === "g1_pa") { // globo PA
             const browserHeaders = {
                 "user- agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36(KHTML, like Gecko) Chrome / 92.0.4515.131 Safari / 537.36"
             }
@@ -148,8 +148,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo] class
@@ -218,7 +218,7 @@ const main = () => {
 
         } // fim do if do g1 PA
 
-        if(base_url[i] === base_url[2]) { // globo esporte
+        if(base_url[i].key === "g1_esport") { // globo esporte
             const browserHeaders = {
                 "user- agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36(KHTML, like Gecko) Chrome / 92.0.4515.131 Safari / 537.36"
             }
@@ -310,7 +310,7 @@ const main = () => {
 
         } // fim do if do globo esporte
 
-        if(base_url[i] === base_url[3]) {  // diario online
+        if(base_url[i].key === "diario_online") {  // diario online
             const browserHeaders = {
                 'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'           
              }
