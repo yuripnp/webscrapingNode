@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
 const { resolve } = require('path');
+const cronjob = require('node-cron');
 
 const base_url = [
     // {key: 'roma_news', value: 'https://www.romanews.com.br/'},
@@ -413,7 +414,22 @@ const main = () => {
     } // laço com iterações das urls
 } // metodo principal main que chama todas as urls
 
-main();
+//                # ┌────────────── second (optional)
+//                # │ ┌──────────── minute
+//                # │ │ ┌────────── hour
+//                # │ │ │ ┌──────── day of month
+//                # │ │ │ │ ┌────── month
+//                # │ │ │ │ │ ┌──── day of week
+//                # │ │ │ │ │ │
+//                # │ │ │ │ │ │
+//                # * * * * * *
+// executa de 2 em 2 horas
+cronjob.schedule('0 */2 * * *', () => {
+    main();
+}, {
+    scheduled: true,
+    timezone: "America/Sao_Paulo"
+});
 
 
 
