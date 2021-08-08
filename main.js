@@ -4,15 +4,12 @@ const path = require('path');
 const cheerio = require('cheerio');
 const { resolve } = require('path');
 
-
-
 const base_url = [
-    {key: 'roma_news', value: 'https://www.romanews.com.br/'},
-    {key: 'g1_pa', value: 'https://g1.globo.com/pa/para/'},
-    {key: 'g1_esport', value: 'https://ge.globo.com/pa/'},
+    // {key: 'roma_news', value: 'https://www.romanews.com.br/'},
+    // {key: 'g1_pa', value: 'https://g1.globo.com/pa/para/'},
+    // {key: 'g1_esport', value: 'https://ge.globo.com/pa/'},
     {key: 'diario_online', value: 'https://dol.com.br/?d=1'},
 ]
-
 
 const main = () => {
 
@@ -52,8 +49,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo]
@@ -148,8 +145,7 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i].value)
-                return axios.get(base_url[i].value).then((response) => response.data)
+                return axios.get(base_url[i].value).then((response) => response.data).catch(console.err)
             };
             /*
             [função para salvar o arquivo] class
@@ -246,8 +242,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo] class
@@ -338,8 +334,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo]
@@ -381,14 +377,16 @@ const main = () => {
                     const arrayNoticias = []
                     $('body').each((i, e) => {
 
-                        //const titulo = $(e).find('div.swiper-slide > a > div.dol-title-slide > h2').text()
-                        //const img = $(e).find('div.swiper-slide > a > div.mw-wrapper > img').attr('data-src')
+                        const titulo = $(e).find('div.swiper-slide > a > div.dol-title-slide > h2').text()
+                        const img = $(e).find('div.swiper-slide > a > div.mw-wrapper > img').attr('src')
 
-                        arrayNoticias.push({link});
+                        arrayNoticias.push({
+                            link: '',
+                            titulo: titulo,
+                            img: img
+                        });
                     });
                     let caminho ='body > section:nth-child(21) > div > div > div:nth-child(1) > div.col-md-12.mw-pad-0.mw-m-b-0 > div > div.swiper-wrapper > div:nth-child(1) > a'
-
-
 
 
                     resolve(arrayNoticias)
