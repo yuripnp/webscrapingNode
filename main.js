@@ -3,16 +3,14 @@ const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
 const { resolve } = require('path');
-
-
+const cronjob = require('node-cron');
 
 const base_url = [
-    'https://www.romanews.com.br/',
-    'https://g1.globo.com/pa/para/',
-    'https://ge.globo.com/pa/',
-    'https://dol.com.br/?d=1'
+    // {key: 'roma_news', value: 'https://www.romanews.com.br/'},
+    // {key: 'g1_pa', value: 'https://g1.globo.com/pa/para/'},
+    // {key: 'g1_esport', value: 'https://ge.globo.com/pa/'},
+    {key: 'diario_online', value: 'https://dol.com.br/?d=1'},
 ]
-
 
 const main = () => {
 
@@ -23,7 +21,7 @@ const main = () => {
 
     for (let i = 0; i < base_url.length; i++) {
 
-        if(base_url[i] === base_url[0]) { // Roma News
+        if(base_url[i].key === "roma_news") { // Roma News
 
             const browserHeaders = {
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
@@ -52,8 +50,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo]
@@ -120,7 +118,7 @@ const main = () => {
             getCachePage(arquivo).then(getPageItems).then((data) => saveData(data, './roma.json')).then(console.log).catch(console.error);
         } // fim do if do romanews
 
-        if(base_url[i] === base_url[1]) { // globo PA
+        if(base_url[i].key === "g1_pa") { // globo PA
             const browserHeaders = {
                 "user- agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36(KHTML, like Gecko) Chrome / 92.0.4515.131 Safari / 537.36"
             }
@@ -148,8 +146,7 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                return axios.get(base_url[i].value).then((response) => response.data).catch(console.err)
             };
             /*
             [função para salvar o arquivo] class
@@ -218,7 +215,7 @@ const main = () => {
 
         } // fim do if do g1 PA
 
-        if(base_url[i] === base_url[2]) { // globo esporte
+        if(base_url[i].key === "g1_esport") { // globo esporte
             const browserHeaders = {
                 "user- agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36(KHTML, like Gecko) Chrome / 92.0.4515.131 Safari / 537.36"
             }
@@ -246,8 +243,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo] class
@@ -310,7 +307,7 @@ const main = () => {
 
         } // fim do if do globo esporte
 
-        if(base_url[i] === base_url[3]) {  // diario online
+        if(base_url[i].key === "diario_online") {  // diario online
             const browserHeaders = {
                 'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'           
              }
@@ -338,8 +335,8 @@ const main = () => {
                 const options = {
                     headers: browserHeaders
                 };
-                console.log(base_url[i])
-                return axios.get(base_url[i]).then((response) => response.data)
+                console.log(base_url[i].value)
+                return axios.get(base_url[i].value).then((response) => response.data)
             };
             /*
             [função para salvar o arquivo]
@@ -381,14 +378,16 @@ const main = () => {
                     const arrayNoticias = []
                     $('body').each((i, e) => {
 
-                        //const titulo = $(e).find('div.swiper-slide > a > div.dol-title-slide > h2').text()
-                        //const img = $(e).find('div.swiper-slide > a > div.mw-wrapper > img').attr('data-src')
+                        const titulo = $(e).find('div.swiper-slide > a > div.dol-title-slide > h2').text()
+                        const img = $(e).find('div.swiper-slide > a > div.mw-wrapper > img').attr('src')
 
-                        arrayNoticias.push({link});
+                        arrayNoticias.push({
+                            link: '',
+                            titulo: titulo,
+                            img: img
+                        });
                     });
                     let caminho ='body > section:nth-child(21) > div > div > div:nth-child(1) > div.col-md-12.mw-pad-0.mw-m-b-0 > div > div.swiper-wrapper > div:nth-child(1) > a'
-
-
 
 
                     resolve(arrayNoticias)
@@ -415,7 +414,22 @@ const main = () => {
     } // laço com iterações das urls
 } // metodo principal main que chama todas as urls
 
-main();
+//                # ┌────────────── second (optional)
+//                # │ ┌──────────── minute
+//                # │ │ ┌────────── hour
+//                # │ │ │ ┌──────── day of month
+//                # │ │ │ │ ┌────── month
+//                # │ │ │ │ │ ┌──── day of week
+//                # │ │ │ │ │ │
+//                # │ │ │ │ │ │
+//                # * * * * * *
+// executa de 2 em 2 horas
+cronjob.schedule('0 */2 * * *', () => {
+    main();
+}, {
+    scheduled: true,
+    timezone: "America/Sao_Paulo"
+});
 
 
 

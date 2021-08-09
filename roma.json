@@ -1,6 +1,21 @@
 {
   "RomaData": [
     {
+      "link": "https://www.romanews.com.br/noticias/mais-de-50-da-populacao-brasileira-ja-foi-vacinada-com-a-primeira/130001/",
+      "titulo": "Mais de 50% da população brasileira já foi vacinada com a primeira dose contra a covid-19",
+      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/whatsapp-image-2021-06-25-at-185057.jpeg"
+    },
+    {
+      "link": "https://www.romanews.com.br/cidade/menores-de-18-anos-ainda-nao-devem-ser-vacinados-contra-a-covid-em/129995/",
+      "titulo": "Menores de 18 anos ainda não devem ser vacinados contra a covid em Belém; entenda o motivo",
+      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/06/698aa0d6-fe44-4660-a9af-3f83c4513dfb.jpg"
+    },
+    {
+      "link": "https://www.romanews.com.br/cidade/boletim-mostra-74-casos-de-covid-19-e-nove-mortes-no-para-divulgados/129990/",
+      "titulo": "Boletim mostra 74 casos de covid-19 e nove mortes no Pará divulgados neste sábado",
+      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/corona-rovena-rosa-abr.jpg"
+    },
+    {
       "link": "https://www.romanews.com.br/olimpiadas/volei-feminino-do-brasil-enfrenta-os-eua-na-briga-pelo-ouro-em-toquio/129986/",
       "titulo": "Vale ouro: vôlei feminino do Brasil enfrenta os EUA nessa madrugada em Tóquio",
       "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/228143772-365992098231636-2840105708971881162-n.jpeg"
@@ -9,21 +24,6 @@
       "link": "https://www.romanews.com.br/noticias/presidente-da-camara-defende-separacao-entre-poderes/129984/",
       "titulo": "Presidente da Câmara defende separação entre poderes",
       "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/01/img20200526161859216.jpg"
-    },
-    {
-      "link": "https://www.romanews.com.br/olimpiadas/estado-brasileiro-soma-mais-medalhas-de-ouro-que-a-argentina-nas/129983/",
-      "titulo": "Estado brasileiro soma mais medalhas de ouro que Argentina nas Olimpíadas",
-      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/e8lkm-guyai81yy.jpg"
-    },
-    {
-      "link": "https://www.romanews.com.br/cidade/para-recebe-mais-81-mil-doses-de-vacinas-contra-covid-19-neste-sabado/129982/",
-      "titulo": "Pará recebe mais 81 mil doses de vacinas contra covid-19 neste sábado",
-      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/vacina-seabra.jpg"
-    },
-    {
-      "link": "https://www.romanews.com.br/noticias/policial-e-presa-novamente-por-perseguir-ex-namorados/129969/",
-      "titulo": "Policial é presa novamente por perseguir ex-namorados",
-      "img": "https://cdn.romanews.com.br/img/c/860/504/dn_arquivo/2021/08/policial-reproducao.jpg"
     }
   ]
 }
